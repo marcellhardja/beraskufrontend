@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {getProfile, isShop} from './UserFunction'
+import {Link} from 'react-router-dom'
 
 class Navbar extends Component{
   constructor(){
