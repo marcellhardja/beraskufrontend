@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const register = newUser => {
     return axios
-    .post('http://berasku.herokuapp.com/api/v1/account', newUser, {
+    .post('https://berasku.herokuapp.com/api/v1/account', newUser, {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
@@ -16,7 +16,7 @@ export const register = newUser => {
 
 export const getAccount = id =>{
     return axios
-    .get((`http://berasku.herokuapp.com/api/v1/account/${id}`), {
+    .get((`https://berasku.herokuapp.com/api/v1/account/${id}`), {
         headers:{
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.usertoken}`
@@ -33,7 +33,7 @@ export const getAccount = id =>{
 
 export const login = user => {
     return axios
-    .post('http://berasku.herokuapp.com/api/auth/login', {
+    .post('https://berasku.herokuapp.com/api/auth/login', {
         email: user.email,
         password: user.password
     },
@@ -53,7 +53,7 @@ export const login = user => {
 
 export const logout = () => {
     return axios
-    .post(('http://berasku.herokuapp.com/api/auth/logout'), {}, {
+    .post(('https://berasku.herokuapp.com/api/auth/logout'), {}, {
         headers: {
             'Authorization': `Bearer ${localStorage.usertoken}`
         }
@@ -70,7 +70,7 @@ export const logout = () => {
 
 export const getProfile = () => {
     return axios
-    .post(('http://berasku.herokuapp.com/api/auth/me'), {}, {
+    .post(('https://berasku.herokuapp.com/api/auth/me'), {}, {
         headers: {
             'Authorization': `Bearer ${localStorage.usertoken}`
         }
@@ -160,7 +160,7 @@ export const getProduct = id =>{
 
 export const getProducts = () =>{
     return axios
-    .get((`http://berasku.herokuapp.com/api/v1/products`), {
+    .get((`https://berasku.herokuapp.com/api/v1/products`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -208,7 +208,7 @@ export const getPost = id =>{
 
 export const getPosts = () =>{
     return axios
-    .get((`http://berasku.herokuapp.com/api/v1/posts`), {
+    .get((`https://berasku.herokuapp.com/api/v1/posts`), {
         headers:{
             'Content-Type': 'application/json'
         }
