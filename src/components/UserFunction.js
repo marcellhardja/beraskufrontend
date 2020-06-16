@@ -86,7 +86,7 @@ export const getProfile = () => {
 
 export const updateProfile = (newUser, id) => {
     return axios
-    .put(`http://berasku.herokuapp.com/api/v1/account/${id}`, newUser, {
+    .put(`https://berasku.herokuapp.com/api/v1/account/${id}`, newUser, {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
@@ -100,7 +100,7 @@ export const updateProfile = (newUser, id) => {
 
 export const addprofileImage = image => {
     return axios
-    .post('http://berasku.herokuapp.com/api/v1/accountImage', image, {
+    .post('https://berasku.herokuapp.com/api/v1/accountImage', image, {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
@@ -113,7 +113,7 @@ export const addprofileImage = image => {
 
 export const getProfilePic = id => {
     return axios
-    .get((`http://berasku.herokuapp.com/api/v1/accountImage/${id}`), {
+    .get((`https://berasku.herokuapp.com/api/v1/accountImage/${id}`), {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -129,7 +129,7 @@ export const getProfilePic = id => {
 
 export const addProduct = products =>{
     return axios
-    .post(('http://berasku.herokuapp.com/api/v1/product'), products, {
+    .post(('https://berasku.herokuapp.com/api/v1/product'), products, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -144,7 +144,7 @@ export const addProduct = products =>{
 
 export const getProduct = id =>{
     return axios
-    .get((`http://berasku.herokuapp.com/api/v1/product/${id}`), {
+    .get((`https://berasku.herokuapp.com/api/v1/product/${id}`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -176,7 +176,7 @@ export const getProducts = () =>{
 
 export const addPost = post =>{
     return axios
-    .post(('http://berasku.herokuapp.com/api/v1/post'), post, {
+    .post(('https://berasku.herokuapp.com/api/v1/post'), post, {
         headers:{
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.usertoken}`
@@ -192,7 +192,7 @@ export const addPost = post =>{
 
 export const getPost = id =>{
     return axios
-    .get((`http://berasku.herokuapp.com/api/v1/post/${id}`), {
+    .get((`https://berasku.herokuapp.com/api/v1/post/${id}`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -224,7 +224,7 @@ export const getPosts = () =>{
 
 export const addProductpic = image => {
     return axios
-    .post('http://berasku.herokuapp.com/api/v1/productImage', image, {
+    .post('https://berasku.herokuapp.com/api/v1/productImage', image, {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
@@ -237,7 +237,7 @@ export const addProductpic = image => {
 
 export const getProductpic = id => {
     return axios
-    .get((`http://berasku.herokuapp.com/api/v1/productImage/${id}`), {
+    .get((`https://berasku.herokuapp.com/api/v1/productImage/${id}`), {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -253,7 +253,7 @@ export const getProductpic = id => {
 
 export const productSearch = product =>{
     return axios
-    .post(('http://berasku-products.herokuapp.com/api/v1/productSearch'), product, {
+    .post(('https://berasku-products.herokuapp.com/api/v1/productSearch'), product, {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -271,7 +271,7 @@ export const productSearch = product =>{
 
 export const addComment = comment =>{
     return axios
-    .post(('http://berasku.herokuapp.com/api/v1/comment'), comment, {
+    .post(('https://berasku.herokuapp.com/api/v1/comment'), comment, {
         headers:{
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.usertoken}`
@@ -303,7 +303,7 @@ export const getComment = (accountID) =>{
 
 export const addtoWishlist = wishlist =>{
     return axios
-    .post(('http://berasku.herokuapp.com/api/v1/wishlist'), wishlist, {
+    .post(('https://berasku.herokuapp.com/api/v1/wishlist'), wishlist, {
         headers:{
             'Content-Type': 'application/json'
         }
