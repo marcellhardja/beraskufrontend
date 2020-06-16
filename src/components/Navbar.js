@@ -37,7 +37,7 @@ componentDidMount(){
         })
         .catch(err=>{
           this.setState({
-            login: <a href="/login" className="nav-link border border-light rounded waves-effect"><i className="fas fa-sign-in-alt" aria-hidden="true"/> Login</a>,
+            login: <Link to="/login" className="nav-link border border-light rounded waves-effect"><i className="fas fa-sign-in-alt" aria-hidden="true"/> Login </Link>,
           })
         })
 }
