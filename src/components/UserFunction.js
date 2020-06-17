@@ -129,7 +129,7 @@ export const getProfilePic = id => {
 
 export const addProduct = products =>{
     return axios
-    .post(('https://berasku.herokuapp.com/api/v1/product'), products, {
+    .post(('https://berasku-products.herokuapp.com/api/v1/product'), products, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -144,7 +144,7 @@ export const addProduct = products =>{
 
 export const getProduct = id =>{
     return axios
-    .get((`https://berasku.herokuapp.com/api/v1/product/${id}`), {
+    .get((`https://berasku-products.herokuapp.com/api/v1/product/${id}`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -160,7 +160,7 @@ export const getProduct = id =>{
 
 export const getProducts = () =>{
     return axios
-    .get((`https://berasku.herokuapp.com/api/v1/products`), {
+    .get((`https://berasku-produts.herokuapp.com/api/v1/products`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -176,7 +176,7 @@ export const getProducts = () =>{
 
 export const addPost = post =>{
     return axios
-    .post(('https://berasku.herokuapp.com/api/v1/post'), post, {
+    .post(('https://berasku-products.herokuapp.com/api/v1/post'), post, {
         headers:{
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.usertoken}`
@@ -192,7 +192,7 @@ export const addPost = post =>{
 
 export const getPost = id =>{
     return axios
-    .get((`https://berasku.herokuapp.com/api/v1/post/${id}`), {
+    .get((`https://berasku-products.herokuapp.com/api/v1/post/${id}`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -208,7 +208,7 @@ export const getPost = id =>{
 
 export const getPosts = () =>{
     return axios
-    .get((`https://berasku.herokuapp.com/api/v1/posts`), {
+    .get((`https://berasku-products.herokuapp.com/api/v1/posts`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -224,7 +224,7 @@ export const getPosts = () =>{
 
 export const addProductpic = image => {
     return axios
-    .post('https://berasku.herokuapp.com/api/v1/productImage', image, {
+    .post('https://berasku-products.herokuapp.com/api/v1/productImage', image, {
         headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
@@ -237,7 +237,7 @@ export const addProductpic = image => {
 
 export const getProductpic = id => {
     return axios
-    .get((`https://berasku.herokuapp.com/api/v1/productImage/${id}`), {
+    .get((`https://berasku-products.herokuapp.com/api/v1/productImage/${id}`), {
         headers: {
             'Content-Type': 'application/json'
         }
