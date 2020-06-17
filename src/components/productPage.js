@@ -156,7 +156,7 @@ class productPage extends Component{
     e.preventDefault()
 
     addtoCart(this.state.productId, this.state.userId).then(res=>{
-      alert('Item has been added to Cart')
+      
     })
   }
 

@@ -368,7 +368,7 @@ export const addtoCart = (productID, accountID) =>{
         }
     })
     .then(res=>{
-        console.log(res.data)
+        alert('Item Added to Cart')
     })
     .catch(err=>{
         console.log(err)

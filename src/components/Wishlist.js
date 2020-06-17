@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import '../css/Landing.css';
 import '../css/Landingstyle.css';
-import {getWishlist, getProfile, getPost, getProductpic, deleteWishlist} from './UserFunction'
+import {getWishlist, getProfile, getPost, getProductpic, deleteWishlist, addtoCart} from './UserFunction'
 
 class Wishlist extends Component{
     constructor(){
@@ -10,7 +10,8 @@ class Wishlist extends Component{
             wishlists: [],
             postName: {},
             postPrice:{},
-            postImage:{}
+            postImage:{},
+            productId: {}
         }
     }
 
@@ -65,6 +66,26 @@ class Wishlist extends Component{
       })
     }
 
+    mapProductId = wishlist =>{
+      wishlist.map(wishlistresult=>{
+        getPost(wishlistresult.postId).then(res=>{
+          console.log(res.data.productId)
+          this.setState(prevState => ({
+            productId: {                   // object that we want to update
+                ...prevState.productId,    // keep all other key-value pairs
+                [wishlistresult.postId]: res.data.productId       // update the value of specific key
+            }
+        }))
+        // console.log(res.productImageURL[0])
+        })
+      })
+    }
+
+    getProductid = id =>{
+      // console.log(this.state.postImage)
+      return this.state.productId[id]
+    }
+
     getPostPic = id =>{
       // console.log(this.state.postImage)
       return this.state.postImage[id]
@@ -79,6 +100,7 @@ class Wishlist extends Component{
             this.mapPostName(res)
             this.mapPostPrice(res)
             this.mapPostpic(res)
+            this.mapProductId(res)
           })
         })
     }
@@ -86,7 +108,6 @@ class Wishlist extends Component{
       const Wishlist =[]
       this.state.wishlists.map(wishlistresult=>{
         wishlistresult.map(result=>{
-          console.log(result.id)
           Wishlist.push(
             <div className="col-md-4 mb-5">
                 {/* Card */}
@@ -97,7 +118,7 @@ class Wishlist extends Component{
                   <div className="text-center pt-4">
                     <h5>{this.getPostTitle(result.postId)}</h5>
                     <h6 className="mb-3">Rp. {this.getPostPrice(result.postId)}</h6>
-                    <button type="button" className="btn btn-primary btn-sm mr-1 mb-2"><i className="fas fa-shopping-cart pr-2" />Add to cart</button>
+                    <button type="button" className="btn btn-primary btn-sm mr-1 mb-2" onClick={()=> addtoCart(this.getProductid(result.postId), result.accountId)}><i className="fas fa-shopping-cart pr-2" />Add to cart</button>
                     <button type="button" className="btn btn-light btn-sm mr-1 mb-2" onClick={()=> this.props.history.push(`/productPage/${result.postId}`)}><i className="fas fa-info-circle pr-2"/>Details</button>
                     <button type="button" className="btn btn-elegant btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip" data-placement="top" title="Remove from wishlist" onClick={()=>deleteWishlist(result.id)}><i className="fas fa-times" /></button>
                   </div>
