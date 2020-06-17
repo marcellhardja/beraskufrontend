@@ -127,6 +127,20 @@ export const getProfilePic = id => {
     })
 }
 
+export const updateProfileImage = (newUser, id) => {
+    return axios
+    .put(`https://berasku.herokuapp.com/api/v1/accountImage/${id}`, newUser, {
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(res => {
+        console.log(res)
+    })
+    .catch(err=>{
+        console.log(newUser)
+        console.log(err)
+    })
+}
+
 export const addProduct = products =>{
     return axios
     .post(('https://berasku-products.herokuapp.com/api/v1/product'), products, {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Select from 'react-select'
 import {register} from './UserFunction'
+import DefaultProfilePic from '../css/img/defaultprofilepic.png'
 
 const options = [
     {value: 'Shop', label: 'Shop'},

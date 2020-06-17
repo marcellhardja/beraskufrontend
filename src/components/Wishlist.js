@@ -81,6 +81,11 @@ class Wishlist extends Component{
       })
     }
 
+    deleteWishlistreload(id){
+      deleteWishlist(id)
+      window.location.reload('false')
+    }
+
     getProductid = id =>{
       // console.log(this.state.postImage)
       return this.state.productId[id]
@@ -94,6 +99,10 @@ class Wishlist extends Component{
     componentDidMount(){
         getProfile().then(res=>{
           getWishlist(res.id).then(res=>{
+            if(res.length == 0){
+              alert('wishlist is empty')
+              this.props.history.push('/')
+            }
             this.setState({
               wishlists: [res]
             })
@@ -120,7 +129,7 @@ class Wishlist extends Component{
                     <h6 className="mb-3">Rp. {this.getPostPrice(result.postId)}</h6>
                     <button type="button" className="btn btn-primary btn-sm mr-1 mb-2" onClick={()=> addtoCart(this.getProductid(result.postId), result.accountId)}><i className="fas fa-shopping-cart pr-2" />Add to cart</button>
                     <button type="button" className="btn btn-light btn-sm mr-1 mb-2" onClick={()=> this.props.history.push(`/productPage/${result.postId}`)}><i className="fas fa-info-circle pr-2"/>Details</button>
-                    <button type="button" className="btn btn-elegant btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip" data-placement="top" title="Remove from wishlist" onClick={()=>deleteWishlist(result.id)}><i className="fas fa-times" /></button>
+                    <button type="button" className="btn btn-elegant btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip" data-placement="top" title="Remove from wishlist" onClick={()=> deleteWishlist(result.id)}><i className="fas fa-times" /></button>
                   </div>
                 </div>
                 {/* Card */}

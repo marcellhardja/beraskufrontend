@@ -184,7 +184,7 @@ class productPage extends Component{
                 <h6 className="font-medium mt-3">{this.getCommentatorName(result.commentatorId)}</h6>
               <div className="comment-text w-100">
                <span className="m-b-15 d-block mt-4">{result.comment} </span>
-               <span className="text-muted float-right">April 14, 2019</span>  
+          <span className="text-muted float-right">{result.created_at}</span>  
               </div>
             </div> {/* Comment Row */}
           </div>
