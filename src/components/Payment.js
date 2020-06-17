@@ -15,7 +15,6 @@ class Payment extends Component{
             description: "rice purchasement",
             address:'',
             cart: [],
-            amount:10000,
             postTitle: {}
         }
         this.onChange = this.onChange.bind(this)
@@ -32,7 +31,7 @@ class Payment extends Component{
             email: token.email,
             description: this.state.description,
             address: this.state.address,
-            amount: this.state.amount
+            amount: this.state.totalPrice
         }
         checkout(newcheckout, this.state.userId).then(res=>{
             console.log(res)
