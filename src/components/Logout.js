@@ -5,11 +5,13 @@ import {logout} from './UserFunction'
 class Logout extends Component{
     componentDidMount(){
         logout()
+        this.props.history.push('/login')
+        window.location.reload('false')
     }
     render(){
         return(
-            <Redirect to={{pathname: "/login"}}/>
-        )   
+            <h1>Logging out...</h1>
+        )
     }
 }
 

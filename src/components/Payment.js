@@ -15,7 +15,8 @@ class Payment extends Component{
             description: "rice purchasement",
             address:'',
             cart: [],
-            postTitle: {}
+            postTitle: {},
+            cartQuantity: ''
         }
         this.onChange = this.onChange.bind(this)
         this.handleToken = this.handleToken.bind(this)
@@ -34,7 +35,8 @@ class Payment extends Component{
             amount: this.state.totalPrice
         }
         checkout(newcheckout, this.state.userId).then(res=>{
-            console.log(res)
+            alert('Payment successful')
+            this.props.history.push('/')
         })
         .catch(err=>{
             console.log(err)
@@ -45,6 +47,14 @@ class Payment extends Component{
         cart.map(result=>{
           this.setState({
               totalPrice: result.totalPrice
+          })
+        })
+      }
+
+      setQuantity = cart =>{
+        cart.map(result=>{
+          this.setState({
+              cartQuantity: result.totalQuantity
           })
         })
       }
@@ -93,6 +103,7 @@ class Payment extends Component{
                 })
                 this.setTotal(res)
                 this.setPostTitle(res)
+                this.setQuantity(res)
             })
         })
     }
@@ -101,18 +112,24 @@ class Payment extends Component{
         const Cart = []
         this.state.cart.map(cartresult=>{
             cartresult.map(result=>{
+              try{
                 Object.entries(result.productId).map((key,value)=>{
-                    console.log(key)
-                    Cart.push(
-                    <li className="list-group-item d-flex justify-content-between lh-condensed">
-                  <div>
-                    <h6 className="my-0">{this.getPostTitle(key[0])}</h6>
-                    <small className="text-muted">{key[1].item.riceType}</small>
-                  </div>
-                    <span className="text-muted">Rp. {key[1].price}</span>
-                </li>
-                    )
-                })
+                  Cart.push(
+                  <li className="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 className="my-0">{this.getPostTitle(key[0])}</h6>
+                  <small className="text-muted">{key[1].item.riceType}</small>
+                </div>
+                  <span className="text-muted">Rp. {key[1].price}</span>
+              </li>
+                  )
+              })
+              }
+              catch{
+                alert('There is nothing in the cart')
+                this.props.history.push('/')
+              }
+                
             })
         })
         return(
@@ -196,7 +213,7 @@ class Payment extends Component{
               {/* Heading */}
               <h4 className="d-flex justify-content-between align-items-center mb-3">
                 <span className="text-muted">Your cart</span>
-                <span className="badge badge-secondary badge-pill">3</span>
+                <span className="badge badge-secondary badge-pill">{this.state.cartQuantity}</span>
               </h4>
               {/* Cart */}
               <ul className="list-group mb-3 z-depth-1">

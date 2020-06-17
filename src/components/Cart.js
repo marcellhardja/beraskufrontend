@@ -124,7 +124,7 @@ class Cart extends Component{
                     Carts.push(
                         <tr>
                             <th scope="row">
-                                <img src={this.getPic(key[0])} alt="" className="img-fluid z-depth-0" />
+                                <img src={this.getPic(key[0])} alt="" className="img-fluid z-depth-0" style={{maxHeight:300}}/>
                             </th>
                             <td>
                                 <h5 className="mt-3">

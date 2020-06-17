@@ -46,6 +46,7 @@ class Landing extends Component{
     mapProduct = product =>{
       product.map(productresult=>{
         getProductpic(productresult.id).then(res=>{
+          // console.log(res)
           this.setState(prevState => ({
             postImage: {                   // object that we want to update
                 ...prevState.postImage,    // keep all other key-value pairs
@@ -123,6 +124,9 @@ class Landing extends Component{
         })
         this.mapProduct(res.data)
       })
+      .catch(err=>{
+        alert('There has been an error')
+      })
 
       getPosts().then(res=>{
         this.setState({
@@ -148,6 +152,8 @@ class Landing extends Component{
       }
       this.state.posts.map(post=>{
         post.map(postresult=>{
+          console.log(postresult.productId)
+          console.log(this.getPicture(postresult.productId))
           Posting.push(<div className="col-lg-3 col-md-6 mb-4">
           {/*Card*/}
           <div className="card" onClick={() => this.props.history.push(`/productPage/${postresult.id}`)}>
@@ -186,7 +192,6 @@ class Landing extends Component{
         <div style={{paddingTop:70}}>
             <nav className="navbar navbar-expand-lg mdb-color lighten-4 mt-3 mb-5">
             {/* Navbar brand */}
-            <span className="navbar-brand text-white">Categories:</span>
             {/* Collapse button */}
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon" />
@@ -195,22 +200,10 @@ class Landing extends Component{
             <div className="collapse navbar-collapse" id="basicExampleNav">
               {/* Links */}
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
-                  <a className="nav-link text-white" href="#">Types
-                    <span className="sr-only">(current)</span>
-                  </a>
-                </li>
+                
               </ul>
               {/* Links */}
-              <div className="col-3">
-                  <Select
-                         name="riceType"
-                         value={this.state.riceType}
-                         onChange={this.riceTypeHandleChange}
-                         options={riceTypeOptions}
-                         placeholder="Type"
-                        />
-                  </div>
+
               <div className="col-3">
                     <Select
                          name="sortType"
@@ -220,12 +213,7 @@ class Landing extends Component{
                          placeholder="Sort Price"
                         />
                     </div>
-              <form className="form-inline" onSubmit={this.onSubmit}>
-                <div className="md-form my-0">
-                  <input className="form-control mr-sm-2" type="text" name="riceType" placeholder="Search" aria-label="Search" onChange={this.onChange}/>
-                  <button type="submit" className="form-control" style={{border: 0}}><i class="fa fa-search" aria-hidden="true"></i></button>
-                </div>
-              </form>
+
             </div>
             {/* Collapsible content */}
           </nav>

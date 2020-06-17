@@ -5,7 +5,8 @@ import {addPost, addProduct, getProfile, addProductpic} from './UserFunction'
 const riceGradeOptions = [
     {value: 'A', label: 'A'},
     {value: 'B', label: 'B'},
-    {value: 'C', label: 'C'}
+    {value: 'C', label: 'C'},
+    {value: 'D', label: 'D'}
 ]
 
 const riceUnitOptions = [
@@ -13,7 +14,36 @@ const riceUnitOptions = [
     {value: 'litre', label: 'litre'}
 ]
 
-var productIDtime = new Date().getTime()
+const riceTextureOptions = [
+    {value: 'soft', label: 'Soft'},
+    {value: 'sticky', label: 'Sticky'},
+    {value: 'fluffy', label: 'Fluffy'},
+    {value: 'chewy', label: 'Chewy'},
+]
+
+const riceTypeOptions = [
+    {value: 'american', label: 'American'},
+    {value: 'basmati', label:'Basmati'},
+    {value: 'jasmine', label: 'Jasmine'},
+    {value: 'japanese', label: 'Japanese'},
+    {value: 'bomba', label: 'Bomba'},
+    {value: 'arborio', label: 'Arborio'}
+]
+
+const riceColorOptions = [
+    {value: 'white', label: 'White'},
+    {value: 'brown', label: 'Brown'},
+    {value: 'red', label: 'Red'},
+]
+
+const riceShapeOptions = [
+    {value: 'long', label: 'Long-grain'},
+    {value: 'medium', label: 'Medium-grain'},
+    {value: 'short', label: 'Short-grain'},
+    {value: 'round', label: 'Round-grain'}
+]
+
+var productIDtime = new Date().getTime()/1000
 
 class AddPost extends Component{
     constructor(){
@@ -23,17 +53,20 @@ class AddPost extends Component{
             productId: productIDtime,
             postTitle: '',
             riceGradeType: null,
-            riceType:'',
-            riceShapeType:'',
-            riceColorType: '',
-            riceTextureType:'',
+            riceType:null,
+            riceShapeType: null,
+            riceColorType: null,
+            riceTextureType: null,
             riceQuantity:'',
             riceUnitType: null,
             price:'',
-            postDescription:''
+            postDescription:'',
+            productImage: null,
+            imagename: ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.ImageonChange = this.ImageonChange.bind(this)
     }
 
     componentDidMount(){
@@ -52,20 +85,35 @@ class AddPost extends Component{
         this.setState({ [e.target.name]: e.target.value})
     }
 
-    // ImageonChange = (e) =>{
-    //     this.setState({
-    //         profilePic: e.target.files[0]
-    //     })
-    // }
+    ImageonChange = (e) =>{
+        this.setState({
+            productImage: e.target.files[0],
+            imagename: e.target.files[0].name
+        })
+    }
+
+    riceTypehandleChange = riceType => {
+        this.setState({riceType});
+    }
 
     riceGradehandleChange = riceGradeType => {
         this.setState({riceGradeType});
-        console.log(riceGradeType.value);
+    }
+
+    riceTexturehandleChange = riceTextureType => {
+        this.setState({riceTextureType});
+    }
+
+    riceColorhandleChange = riceColorType => {
+        this.setState({riceColorType});
+    }
+
+    riceShapehandleChange = riceShapeType => {
+        this.setState({riceShapeType});
     }
 
     riceUnithandleChange = riceUnitType => {
         this.setState({riceUnitType});
-        console.log(riceUnitType.value);
     }
 
     onSubmit(e) {
@@ -74,10 +122,10 @@ class AddPost extends Component{
         const newProduct = {
             id: this.state.productId,
             riceGradeType: this.state.riceGradeType.value,
-            riceType: this.state.riceType,
-            riceShapeType: this.state.riceShapeType,
-            riceColorType:this.state.riceColorType,
-            riceTextureType:this.state.riceTextureType,
+            riceType: this.state.riceType.value,
+            riceShapeType: this.state.riceShapeType.value,
+            riceColorType:this.state.riceColorType.value,
+            riceTextureType:this.state.riceTextureType.value,
             riceQuantity: this.state.riceQuantity,
             riceUnitType: this.state.riceUnitType.value,
             price: this.state.price
@@ -87,18 +135,25 @@ class AddPost extends Component{
             userId: this.state.userId,
             productId: this.state.productId,
             postTitle: this.state.postTitle,
-            postDescription: this.state.postDescription
+            postDescription: this.state.postDescription,
+            price:this.state.price,
+            countSold: 0
         }
 
+
         let form_data = new FormData();
-        form_data.append('productId', this.state.id)
-        form_data.append('profilePic', this.state.profilePic);
+        form_data.append('productId', this.state.productId)
+        form_data.append('productImage', this.state.productImage);
+
+        addProductpic(form_data).then(res=>{
+            console.log(res)
+        })
 
         addProduct(newProduct).then(res => {
-            console.log(this.state.userId)
             addPost(newPost).then(res=>{
                 this.props.history.push(`/`)
             })
+            
         })
         .catch(err=>{
             console.log(err)
@@ -121,25 +176,24 @@ class AddPost extends Component{
                          />
                          <input type="text" 
                         name="postDescription" 
-                        className="form-control mb-4" 
+                        className="form-control" 
                         placeholder="Post Description"
                         value={this.state.postDescription}
                         onChange={this.onChange}
                          />
-                    <input type="text" 
-                        name="riceTextureType" 
-                        className="form-control mb-4" 
-                        placeholder="Rice Texture"
-                        value={this.state.riceTextureType}
-                        onChange={this.onChange}
-                         />
-                         <input type="text" 
-                        name="riceColorType" 
-                        className="form-control mb-4" 
-                        placeholder="Rice Color"
-                        value={this.state.riceColorType}
-                        onChange={this.onChange}
-                         />
+                    </div>
+
+                    <div className="form-row mb-4">
+                        <div className="col">
+                        <Select
+                         name="riceType"
+                         value={this.state.riceType}
+                         onChange={this.riceTypehandleChange}
+                         options={riceTypeOptions}
+                         placeholder="Rice Type"
+                        />
+                        </div>
+
                         <div className="col">
                         <Select
                          name="riceGradeType"
@@ -149,26 +203,39 @@ class AddPost extends Component{
                          placeholder="Rice Grade"
                         />
                         </div>
-
-                        <div className="col">
-                        <input type="text" 
-                            name="riceType" 
-                            className="form-control" 
-                            placeholder="Rice Type"
-                            value={this.state.riceType}
-                            onChange={this.onChange} />
-                        </div>
-
                     </div>
 
                     <div className="form-row mb-4">
                         <div className="col">
-                        <input type="text" 
-                            name="riceShapeType"
-                            className="form-control" 
-                            placeholder="Rice Shape" 
-                            value={this.state.riceShapeType}
-                            onChange={this.onChange} />
+                        <Select
+                         name="riceTextureType"
+                         value={this.state.riceTextureType}
+                         onChange={this.riceTexturehandleChange}
+                         options={riceTextureOptions}
+                         placeholder="Rice Texture"
+                        />
+                        </div>
+
+                        <div className="col">
+                        <Select
+                         name="riceColorType"
+                         value={this.state.riceColorType}
+                         onChange={this.riceColorhandleChange}
+                         options={riceColorOptions}
+                         placeholder="Rice Color"
+                        />
+                        </div>
+                    </div>
+
+                    <div className="form-row mb-4">
+                        <div className="col">
+                        <Select
+                         name="riceShapeType"
+                         value={this.state.riceShapeType}
+                         onChange={this.riceShapehandleChange}
+                         options={riceShapeOptions}
+                         placeholder="Rice Shape"
+                        />
                         </div>
 
                         <div className="col">
@@ -193,28 +260,20 @@ class AddPost extends Component{
 
                     <input type="text" 
                         name="price" 
-                        className="form-control" 
+                        className="form-control mb-3" 
                         placeholder="Price" 
                         value={this.state.price}
                         onChange={this.onChange} />
 
-
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="defaultRegisterFormNewsletter" />
-                        <label className="custom-control-label" htmlFor="defaultRegisterFormNewsletter">Subscribe to our newsletter</label>
+                    <label htmlFor="defaultLoginFormEmail">Product picture</label>
+                    <div className="input-group mb-3">
+                        <div className="custom-file">
+                        <input type="file" className="custom-file-input" name="productImage" accept="image/jpeg, image/png, image/jpg" onChange={this.ImageonChange} />
+                        <label className="custom-file-label">{this.state.imagename}</label>
+                        </div>
                     </div>
 
-                    <button className="btn btn-info my-4 btn-block" type="submit">Sign in</button>
-                    <p>or sign up with:</p>
-                    <a href="#" className="mx-2" role="button"><i className="fab fa-facebook-f light-blue-text" /></a>
-                    <a href="#" className="mx-2" role="button"><i className="fab fa-twitter light-blue-text" /></a>
-                    <a href="#" className="mx-2" role="button"><i className="fab fa-linkedin-in light-blue-text" /></a>
-                    <a href="#" className="mx-2" role="button"><i className="fab fa-github light-blue-text" /></a>
-                    <hr />
-                    <p>By clicking
-                        <em> Sign up</em> you agree to our
-                        <a href target="_blank">terms of service</a>
-                    </p>
+                    <button className="btn btn-success my-4 btn-block " type="submit">Add Post</button>
                  </form> 
                 </div>
             </div>

@@ -11,6 +11,7 @@ class UpdateProfile extends Component{
             phoneNumber:'',
             id: '',
             profilePic: null,
+            profilepicname: ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -35,7 +36,8 @@ class UpdateProfile extends Component{
 
     ImageonChange = (e) =>{
         this.setState({
-            profilePic: e.target.files[0]
+            profilePic: e.target.files[0],
+            profilepicname: e.target.files[0].name
         })
     }
 
@@ -64,6 +66,7 @@ class UpdateProfile extends Component{
         })
     }
     render(){
+        console.log(this.state.profilepicname)
         return(
             <div className="row  pt-5 mt-5">
                 <div className="col-lg-2" />
@@ -89,7 +92,7 @@ class UpdateProfile extends Component{
                     <div className="input-group mb-3">
                         <div className="custom-file">
                         <input type="file" className="custom-file-input" name="profilePic" accept="image/jpeg, image/png, image/jpg" onChange={this.ImageonChange} />
-                        <label className="custom-file-label">Choose file</label>
+                        <label className="custom-file-label">{this.state.profilepicname}</label>
                         </div>
                     </div>
                     <div>

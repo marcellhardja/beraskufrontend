@@ -160,7 +160,7 @@ export const getProduct = id =>{
 
 export const getProducts = () =>{
     return axios
-    .get((`https://berasku-produts.herokuapp.com/api/v1/products`), {
+    .get((`https://berasku-products.herokuapp.com/api/v1/products`), {
         headers:{
             'Content-Type': 'application/json'
         }
@@ -216,6 +216,19 @@ export const getPosts = () =>{
     .then(res=>{
         console.log(res.data)
         return(res.data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
+export const updatePost = (newPost, id) => {
+    return axios
+    .put(`https://berasku-products.herokuapp.com/api/v1/post/${id}`, newPost, {
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(res => {
+        console.log(res)
     })
     .catch(err=>{
         console.log(err)
