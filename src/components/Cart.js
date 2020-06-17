@@ -206,7 +206,7 @@ class Cart extends Component{
                                 </h4>
                             </td>
                             <td colSpan={3} className="text-right">
-                                <button type="button" className="btn btn-primary btn-rounded">Complete purchase
+                                <button type="button" className="btn btn-primary btn-rounded" onClick={() => this.props.history.push('/payment')}>Complete purchase
                                 <i className="fas fa-angle-right right" />
                                 </button>
                             </td>

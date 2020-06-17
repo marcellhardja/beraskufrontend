@@ -16,24 +16,24 @@ componentDidMount(){
         console.log(res.firstName)
         if(isShop){
           this.setState({
-            addPost_cart: <a href="/addpost" className="nav-link border border-light rounded waves-effect mr-3">
+            addPost_cart: <Link to="/addpost" className="nav-link border border-light rounded waves-effect mr-3">
             <i className="fa fa-upload" />
             <span className="clearfix d-none d-sm-inline-block ml-2"> Add Post</span>
-          </a>
+          </Link>
           })
         }
         else{
           this.setState({
-            addPost_cart: <a href className="nav-link waves-effect">
+            addPost_cart: <Link href className="nav-link waves-effect">
             <span className="badge red z-depth-1 mr-1"> 1 </span>
             <i className="fas fa-shopping-cart" />
             <span className="clearfix d-none d-sm-inline-block">Cart</span>
-          </a>
+          </Link>
           })
         }
 
         this.setState({
-            login: <a href="/logout" className="nav-link border border-light rounded waves-effect"><i className="fas fa-sign-out-alt"></i> Logout</a>,
+            login: <Link to="/logout" className="nav-link border border-light rounded waves-effect"><i className="fas fa-sign-out-alt"></i> Logout</Link>,
         })
         })
         .catch(err=>{
@@ -65,20 +65,20 @@ componentDidMount(){
                 </a>
               </li> */}
               <li className="nav-item">
-                <a className="nav-link waves-effect" href="/profile">Profile</a>
+                <Link to="/profile" className="nav-link waves-effect" >Profile</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link waves-effect" href="/wishlist">Wishlist</a>
+                <Link to="/wishlist" className="nav-link waves-effect">Wishlist</Link>
               </li>
             </ul>
             {/* Right */}
             <ul className="navbar-nav nav-flex-icons">
             <li className="nav-item">
-              <a href="/cart" className="nav-link waves-effect">
+              <Link to="/cart" className="nav-link waves-effect">
                 <span className="badge red z-depth-1 mr-1"> 1 </span>
                 <i className="fas fa-shopping-cart" />
                 <span className="clearfix d-none d-sm-inline-block mr-2 "> Cart </span>
-              </a>
+              </Link>
               </li>
 
               <li className="nav-item">

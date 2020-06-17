@@ -12,13 +12,13 @@ import Logout from './components/Logout'
 import ProductPage from './components/productPage'
 import Cart from './components/Cart'
 import Wishlist from './components/Wishlist'
+import Payment from './components/Payment'
 
 function App() {
   return (
     <BrowserRouter>
     <div className="App">
       <Navbar />
-      <div className="container">
         <Route exact path="/" component={Landing}></Route>
         <Route exact path="/register" component={Register}></Route>
         <Route exact path ="/login" component={Login}></Route>
@@ -30,7 +30,7 @@ function App() {
         <Route exact path="/productpage/:id" component={ProductPage}></Route>
         <Route exact path="/cart" component={Cart}></Route>
         <Route exact path="/wishlist" component={Wishlist}></Route>
-      </div>
+        <Route exact path="/payment" component={Payment}></Route>
     </div>
     </BrowserRouter>
   );

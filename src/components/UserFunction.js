@@ -259,8 +259,8 @@ export const productSearch = product =>{
         }
     })
     .then(res=>{
-        console.log(res)
-        return(res)
+        console.log(res.data)
+        return(res.data)
     })
     .catch(err=>{
         console.log(err)
@@ -403,6 +403,21 @@ export const deleteCartAll = (productID,accountID) =>{
     })
     .then(res=>{
         console.log(res.data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
+export const checkout = (token, id) =>{
+    return axios
+    .post((`https://berasku-transaction.herokuapp.com/api/v1/checkout/${id}`), token, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res=>{
+        console.log(res.data.message)
     })
     .catch(err=>{
         console.log(err)

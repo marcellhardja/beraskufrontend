@@ -11,8 +11,14 @@ const sortOptions = [
 ]
 
 const riceTypeOptions = [
-  {value: 'jasmani', label: 'Jasmani'},
-  {value: 'basmani', label:'Basmani'}
+  {value: 'Jasmani', label: 'Jasmani'},
+  {value: 'Basmani', label:'Basmani'}
+]
+
+const riceGradeOptions = [
+  {value: 'a', label: 'A'},
+  {value: 'b', label: 'B'},
+  {value: 'c', label: 'C'}
 ]
 
 class Landing extends Component{
@@ -28,7 +34,10 @@ class Landing extends Component{
             postID: '',
             postImage: {},
             sortBool: '',
-            riceTypeBool: ''
+            riceType:'',
+            searchBool:'',
+            searchResult: [],
+            inputSearch:{}
         }
         this.sortAsc = this.sortAsc.bind(this)
         this.sortDes = this.sortDes.bind(this)
@@ -65,24 +74,49 @@ class Landing extends Component{
       })
     }
 
-    filterJasmani = product =>{
-      product.map(productresult =>{
-        productresult.filter(result => result.riceType === "Jasmine").map(filteredresult =>{
-          console.log(filteredresult)
-        })
-      })
-    }
+    // filterJasmani = product =>{
+    //   product.map(productresult =>{
+    //     productresult.filter(result => result.riceType === "Jasmine").map(filteredresult =>{
+    //       console.log(filteredresult)
+    //     })
+    //   })
+    // }
 
     handleChange = sortType => {
       this.setState({sortType, sortBool: sortType});
   }
 
-  riceTypeHandleChange = riceType => {
-    this.setState({riceType, riceTypeBool: riceType});
+    riceTypeHandleChange = riceType => {
+      this.setState({riceType, riceType: riceType});
+  }
+
+  onChange(e) {
+    this.setState({ riceType: e.target.value})
 }
+
+  onSubmit(e){
+    e.preventdefault()
+
+    const inputSearch = {
+      inputRiceGradeType: "null",
+      inputRiceType: this.state.riceType,
+      inputRiceShapeType: "null",
+      inputRiceTextureType: "null",
+      inputRiceColorType: "null",
+      inputRiceQuantity: "null"
+    }
+
+    productSearch(inputSearch).then(res=>{
+      this.setState({
+        searchResult: [res.data]
+      })
+    })
+  }
+  
 
 
     componentDidMount(){
+
       getProducts().then(res=>{
         this.setState({
           products:[res.data]
@@ -95,17 +129,16 @@ class Landing extends Component{
           posts:[res.data],
           postID: res.data.id
         })
-      })
+      })  
       .catch(err=>{
         console.log(err)
       })
-
     }
+
 
     
 
     render(){
-      this.filterJasmani(this.state.products)
       const Posting = []
       if(this.state.sortBool.value === "ascend"){
         this.sortAsc(this.state.posts)
@@ -115,8 +148,6 @@ class Landing extends Component{
       }
       this.state.posts.map(post=>{
         post.map(postresult=>{
-          // console.log(postresult)
-          // console.log(postresult.productId)
           Posting.push(<div className="col-lg-3 col-md-6 mb-4">
           {/*Card*/}
           <div className="card" onClick={() => this.props.history.push(`/productPage/${postresult.id}`)}>
@@ -148,15 +179,14 @@ class Landing extends Component{
         </div>)
         })
       })
-      
+      console.log(this.state.riceType)
         return(
             <main>
         <div className="container">
         <div style={{paddingTop:70}}>
-        {/*Navbar*/}
-         <nav className="navbar navbar-expand-lg navbar-dark mdb-color mt-3 mb-5">
+            <nav className="navbar navbar-expand-lg mdb-color lighten-4 mt-3 mb-5">
             {/* Navbar brand */}
-            <span className="navbar-brand">Categories:</span>
+            <span className="navbar-brand text-white">Categories:</span>
             {/* Collapse button */}
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon" />
@@ -164,79 +194,41 @@ class Landing extends Component{
             {/* Collapsible content */}
             <div className="collapse navbar-collapse" id="basicExampleNav">
               {/* Links */}
-              {/* <ul className="navbar-nav mr-auto">
+              <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                  <a className="nav-link" href="#">All
+                  <a className="nav-link text-white" href="#">Types
                     <span className="sr-only">(current)</span>
                   </a>
                 </li>
-                <li className="nav-item">
-                <a className="nav-link" href="#">Rice Type</a>
-                <Select
-                         name="riceType"
-                         value={this.state.riceTypeBool}
-                         onChange={this.riceTypeHandleChange}
-                         options={riceTypeOptions}
-                         placeholder="Rice Type"
-                        />
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Grade</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Texture</a>
-                </li>
-              </ul> */}
+              </ul>
               {/* Links */}
-              <div className="d-inline col-2">
-              <Select
+              <div className="col-3">
+                  <Select
                          name="riceType"
-                         value={this.state.riceTypeBool}
+                         value={this.state.riceType}
                          onChange={this.riceTypeHandleChange}
                          options={riceTypeOptions}
-                         placeholder="Rice Type"
+                         placeholder="Type"
                         />
-              </div>
-              <div className="d-inline col-2">
-              <Select
-                         name="riceType"
-                         value={this.state.riceTypeBool}
-                         onChange={this.riceTypeHandleChange}
-                         options={riceTypeOptions}
-                         placeholder="Rice Type"
-                        />
-              </div>
-              <div className="d-inline col-2">
-              <Select
-                         name="riceType"
-                         value={this.state.riceTypeBool}
-                         onChange={this.riceTypeHandleChange}
-                         options={riceTypeOptions}
-                         placeholder="Rice Type"
-                        />
-              </div>
-              <div className="d-inline col-4 ml-5">
-              <Select
+                  </div>
+              <div className="col-3">
+                    <Select
                          name="sortType"
                          value={this.state.sortBool}
                          onChange={this.handleChange}
                          options={sortOptions}
                          placeholder="Sort Price"
                         />
-              </div>
-              {/* <div className="d-inline">
-                <i className="fas fa-filter text-white"></i>
-                <a href="#" className="text-white ml-1">Filter</a>
-              </div> */}
-              {/* <form className="form-inline">
+                    </div>
+              <form className="form-inline" onSubmit={this.onSubmit}>
                 <div className="md-form my-0">
-                  <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+                  <input className="form-control mr-sm-2" type="text" name="riceType" placeholder="Search" aria-label="Search" onChange={this.onChange}/>
+                  <button type="submit" className="form-control" style={{border: 0}}><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
-              </form> */}
+              </form>
             </div>
             {/* Collapsible content */}
           </nav>
-          {/*/.Navbar*/}
         </div>
           
           {/* Section: Products v.3 */}

@@ -65,6 +65,9 @@ class productPage extends Component{
             }
         }))
         })
+        .catch(err=>{
+          console.log(err)
+        })
       })
     }
 
@@ -118,6 +121,7 @@ class productPage extends Component{
       })
       .catch(err=>{
         alert('You need to log in to continue')
+        this.props.history.push('/login')
       })
 
       getComment(this.props.match.params.id).then(res=>{
