@@ -235,6 +235,16 @@ export const updatePost = (newPost, id) => {
     })
 }
 
+export const deletePost = (id) =>{
+    return axios
+    .delete(`https://berasku-products.herokuapp.com/api/v1/post/${id}`, {
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(res=>{
+        console.log(res)
+    })
+}
+
 export const addProductpic = image => {
     return axios
     .post('https://berasku-products.herokuapp.com/api/v1/productImage', image, {

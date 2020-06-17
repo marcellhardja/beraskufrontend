@@ -6,7 +6,7 @@ class Logout extends Component{
     componentDidMount(){
         logout()
         this.props.history.push('/login')
-        window.location.reload('false')
+        window.location.reload()
     }
     render(){
         return(

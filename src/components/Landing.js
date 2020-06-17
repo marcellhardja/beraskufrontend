@@ -94,25 +94,6 @@ class Landing extends Component{
   onChange(e) {
     this.setState({ riceType: e.target.value})
 }
-
-  onSubmit(e){
-    e.preventdefault()
-
-    const inputSearch = {
-      inputRiceGradeType: "null",
-      inputRiceType: this.state.riceType,
-      inputRiceShapeType: "null",
-      inputRiceTextureType: "null",
-      inputRiceColorType: "null",
-      inputRiceQuantity: "null"
-    }
-
-    productSearch(inputSearch).then(res=>{
-      this.setState({
-        searchResult: [res.data]
-      })
-    })
-  }
   
 
 

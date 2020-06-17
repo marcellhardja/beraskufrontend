@@ -8,6 +8,7 @@ import Profile from './components/Profile'
 import UpdateProfile from './components/UpdateProfile'
 import AddPost from './components/AddPost'
 import ManagePost from './components/managePost'
+import UpdatePost from './components/UpdatePost'
 import Test from './components/Test'
 import Logout from './components/Logout'
 import ProductPage from './components/productPage'
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/updateprofile" component={UpdateProfile}></Route>
         <Route exact path="/addpost" component={AddPost}></Route>
         <Route exact path="/managepost" component={ManagePost}></Route>
+        <Route exact path="/updatepost/:id" component={UpdatePost}></Route>
         <Route exact path="/test" component={Test}></Route>
         <Route exact path="/logout" component={Logout}></Route>
         <Route exact path="/productpage/:id" component={ProductPage}></Route>

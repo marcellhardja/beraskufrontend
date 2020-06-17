@@ -87,12 +87,12 @@ class Cart extends Component{
 
       decreaseQty = (productID, accountID) =>{
           deleteCart(productID, accountID)
-          window.location.reload('false')
+          window.location.reload()
       }
 
       removeQty = (productID, accountID) =>{
           deleteCartAll(productID, accountID)
-          window.location.reload('false')
+          window.location.reload()
       }
     
 

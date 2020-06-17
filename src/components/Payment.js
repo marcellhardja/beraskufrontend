@@ -41,6 +41,7 @@ class Payment extends Component{
         .catch(err=>{
             console.log(err)
         })
+        console.log(token)
         
     }
     setTotal = cart =>{
