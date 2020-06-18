@@ -8,7 +8,7 @@ class Profile extends Component {
         this.state = {
             name: '',
             email: '',
-            id: '',
+            billingID: '',
             profilePic: null,
         }
     }
@@ -20,7 +20,7 @@ class Profile extends Component {
             this.setState({
                 name: res.firstName,
                 email: res.email,
-                id: res.id
+                billingID: res.billingNumber
             })
             getProfilePic(res.id).then(result=>{
                 console.log(res.id)
@@ -73,8 +73,8 @@ class Profile extends Component {
                                 <td>{this.state.email}</td>
                             </tr>
                             <tr>
-                                <td>ID</td>
-                                <td>{this.state.id}</td>
+                                <td>Billing Details</td>
+                                <td>{this.state.billingID}</td>
                             </tr>
                         </tbody>
                     </table>

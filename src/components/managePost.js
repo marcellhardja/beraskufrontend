@@ -95,7 +95,6 @@ class managePost extends Component{
                   <h5>
                     <strong>
                       <a href className="dark-grey-text">{postresult.postTitle}
-                        <span className="badge badge-pill danger-color">{postresult.id}</span>
                       </a>
                     </strong>
                   </h5>

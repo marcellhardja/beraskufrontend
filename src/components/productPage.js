@@ -27,7 +27,8 @@ class productPage extends Component{
             commentPost:'',
             userComment: [],
             commentatorName: {},
-            commentatorPic: {}
+            commentatorPic: {},
+            sellerPhone:''
 
         }
         this.onChange = this.onChange.bind(this)
@@ -86,7 +87,8 @@ class productPage extends Component{
             })
             getAccount(res.data.userId).then(res=>{
               this.setState({
-                sellerName: res.data.firstName
+                sellerName: res.data.firstName,
+                sellerPhone: res.data.phoneNumber
               })
               console.log(res)
             })
@@ -248,6 +250,10 @@ class productPage extends Component{
                   <div className="mb-3">
                     <p className="lead font-weight-bold d-inline">Sold By: </p>
                     <p className="d-inline">{this.state.sellerName}</p>
+                  </div>
+                  <div className="mb-3">
+                    <p className="lead font-weight-bold d-inline">Contact Seller: </p>
+                  <a href="https://api.whatsapp.com/send?phone=+6281808301617&text=I%20want%20to%20buy">{this.state.sellerPhone}</a>
                   </div>
                   <p className="lead font-weight-bold">Description</p>
                   <p>{this.state.postDescription}</p>
