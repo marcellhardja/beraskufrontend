@@ -17,7 +17,8 @@ class Register extends Component {
             email:'',
             phoneNumber:'',
             userType: null,
-            password:''
+            password:'',
+            billingNumber: ''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -40,7 +41,8 @@ class Register extends Component {
             email: this.state.email,
             phoneNumber:this.state.phoneNumber,
             userType:this.state.userType.value,
-            password: this.state.password
+            password: this.state.password,
+            billingNumber: this.state.billingNumber
         }
 
         register(newUser).then(res => {
@@ -78,7 +80,7 @@ class Register extends Component {
                         <div className="col">
                         <input type="text" 
                             name="phoneNumber"
-                            className="form-control mb-4" 
+                            className="form-control" 
                             placeholder="Phone number" 
                             aria-describedby="defaultRegisterFormPhoneHelpBlock"
                             value={this.state.phoneNumber}
@@ -95,6 +97,14 @@ class Register extends Component {
                         />
                         </div>
                     </div>
+
+                    <input type="text" 
+                        name="billingNumber" 
+                        className="form-control mb-4" 
+                        placeholder="Billing Number"
+                        value={this.state.billingNumber}
+                        onChange={this.onChange}
+                         />
                     
 
                     <input type="email" 

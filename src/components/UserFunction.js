@@ -461,6 +461,22 @@ export const checkout = (token, id) =>{
     })
 }
 
+export const getHistory = (accountID) =>{
+    return axios
+    .get((`https://berasku-transaction.herokuapp.com/api/v1/order/${accountID}`), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res=>{
+        console.log(res.data)
+        return(res.data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
 
 export const isShop = data =>{
     if(data === "Shop"){

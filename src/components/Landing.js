@@ -152,11 +152,10 @@ class Landing extends Component{
               <h5>
                 <strong>
                   <a href className="dark-grey-text">{postresult.postTitle}
-                    <span className="badge badge-pill danger-color">{postresult.id}</span>
                   </a>
                 </strong>
               </h5>
-              <h4 className="font-weight-bold blue-text">
+              <h4 className="font-weight-bold green-text">
             <strong>Rp. {postresult.price}</strong>
               </h4>
             </div>
@@ -171,7 +170,7 @@ class Landing extends Component{
             <main>
         <div className="container">
         <div style={{paddingTop:70}}>
-            <nav className="navbar navbar-expand-lg mdb-color lighten-4 mt-3 mb-5">
+            <nav className="navbar navbar-expand-lg bg-success mt-3 mb-5">
             {/* Navbar brand */}
             {/* Collapse button */}
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">

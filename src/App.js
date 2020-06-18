@@ -15,6 +15,7 @@ import ProductPage from './components/productPage'
 import Cart from './components/Cart'
 import Wishlist from './components/Wishlist'
 import Payment from './components/Payment'
+import History from './components/History'
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
         <Route exact path="/cart" component={Cart}></Route>
         <Route exact path="/wishlist" component={Wishlist}></Route>
         <Route exact path="/payment" component={Payment}></Route>
+        <Route exact path="/history" component={History}></Route>
+
     </div>
     </BrowserRouter>
   );
